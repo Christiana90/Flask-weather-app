@@ -22,11 +22,11 @@ Here's how the application works:
 ## Screenshots
 **Weather Display Example**
 
-![Weather Display](./static/images/Bremen Weather.png)
+![Weather Display](./static/images/Weather-Display.png)
 
 **Error Example**
 
-![Error Message](./static/images/erroe message.png)
+![Error Message](./static/images/Error-message.png)
 
 ## Technologies Used
 - **Flask**: A lightweight web framework for Python.
