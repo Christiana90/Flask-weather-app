@@ -22,11 +22,13 @@ def get_weather():
         # You could render "City Not Found" instead like we do below
         #city = "Bremen"
 
-    #weather_data = get_current_weather(city)
+   # Fetch weather data for the provided city
+    weather_data = get_current_weather(city)
 
-    # City is not found by API
+    
+    # Check if the API response code indicates success
     if not weather_data['cod'] == 200:
-        return render_template('error.html')
+     return render_template('error.html')
 
     return render_template(
         "weather.html",
