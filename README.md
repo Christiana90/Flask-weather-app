@@ -155,4 +155,3 @@ This project is open-source and available under the [MIT License](LICENSE).
 
 ---
 
-This `README.md` is designed to give a clear and concise overview of the project, guide users through the setup and usage, and help contributors get started with development. Let me know if you need any further customization!
