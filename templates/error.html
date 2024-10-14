@@ -22,12 +22,14 @@
         </style>
     </head>
     <body>
-        <h1>Oops! The city you entered is wrong</h1>
-        <h2>Please enter a correct city</h2>
+        <h1 style="color: red; font-size: 2.5em; text-align: center; margin-top: 20px;">Oops! The city you entered is incorrect</h1>
+        <h2 style="text-align: center; font-size: 1.5em; color: gray;">Please enter a valid city name</h2>
+        
+        
         
         <!-- Random Dog Picture -->
         <img src="{{ url_for('static', filename='images/dog.jpeg') }}" alt="Dog Picture">
         
-        <p>Go back to <a href="/">index</a></p>
+        <p>Go back to <a href="/">home</a></p>
     </body>
 </html>

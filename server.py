@@ -1,34 +1,41 @@
 from flask import Flask, render_template, request
-from weather import get_current_weather
-from waitress import serve
+from dotenv import load_dotenv
+import os
+import requests
+
+load_dotenv()
+
+def get_current_weather(city="Kansas City"):
+    api_key = os.getenv("API_KEY")
+    request_url = f'http://api.openweathermap.org/data/2.5/weather?appid={api_key}&q={city}&units=imperial'
+    
+    response = requests.get(request_url)
+    return response.json()
+
+
 
 app = Flask(__name__)
 
 
 @app.route('/')
-@app.route('/index')
-def index():
+def home():
     return render_template('index.html')
-
 
 @app.route('/weather')
 def get_weather():
     city = request.args.get('city')
 
-    # Check for empty strings or string with only spaces
-    if not bool(city.strip()):
-        #redirect you to the error page
-         return render_template('error.html')
-        # You could render "City Not Found" instead like we do below
-        #city = "Bremen"
+    # Check if city is wrong
+    if not city or not city.strip():
+        return render_template('noinput.html')
+    # if there was no input in the city
 
-   # Fetch weather data for the provided city
+    # Fetch weather data for the provided city
     weather_data = get_current_weather(city)
 
-    
     # Check if the API response code indicates success
-    if not weather_data['cod'] == 200:
-     return render_template('error.html')
+    if weather_data['cod'] != 200:
+        return render_template('error.html')
 
     return render_template(
         "weather.html",
@@ -40,4 +47,4 @@ def get_weather():
 
 
 if __name__ == "__main__":
-    serve(app, host="0.0.0.0", port=8000)
+    app.run()
