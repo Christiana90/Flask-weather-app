@@ -41,9 +41,10 @@ Before you can run the project, ensure you have the following installed:
 
 - **Python 3.x**: The project is built using Python.
 - **Git**: To clone the repository.
-- **Flask**: To run the web server.
+- **Flask**: To run the web server without docker.
+- **Docker**: To containerize and deploy the app. 
 
-### Setup Instructions
+### Setup Instructions (Without Docker)
 
 1. **Clone the Repository**
    Start by cloning this repository to your local machine:
@@ -89,6 +90,86 @@ Before you can run the project, ensure you have the following installed:
    ```
 
    By default, the app will be available at `http://127.0.0.1:5000/`.
+
+
+   ### Running the Application with Docker
+
+The following instructions will help you build and run the app using Docker.
+
+1. **Create a Dockerfile**
+
+   If not already in place, ensure your `Dockerfile` is in the project root with the following content:
+
+   ```dockerfile
+   # Use an official Python runtime as the base image
+   FROM python:3.9-slim
+
+   # Set the working directory
+   WORKDIR /app
+
+   # Copy the requirements file and install dependencies
+   COPY requirements.txt .
+   RUN pip install --no-cache-dir -r requirements.txt
+
+   # Copy the rest of the app files
+   COPY . .
+
+   # Expose the port Flask runs on
+   EXPOSE 5000
+
+   # Set environment variables for Flask
+   ENV FLASK_APP=server.py
+   ENV FLASK_RUN_HOST=0.0.0.0
+
+   # Run the application
+   CMD ["flask", "run"]
+
+
+
+2. **Set Up Your API Key**
+
+   In the root of the project, create a `.env` file to store your OpenWeatherMap API key securely. Add your API key to the `.env` file as follows:
+
+API_KEY=your_openweathermap_api_key
+
+ 
+Replace `your_openweathermap_api_key` with the actual API key you obtained from [OpenWeatherMap](https://home.openweathermap.org/users/sign_up). This `.env` file will be used by the application to authenticate requests to the weather API.
+
+3. **Build the Docker Image**
+
+Use the following command to build the Docker image for the application:
+
+```bash
+docker build -t flask-weather-app .
+
+This command will create a Docker image tagged as `flask-weather-app` based on the instructions in the Dockerfile.
+
+### Run the Docker Container
+
+To start the Docker container and make the app accessible on your local machine, use the command below. It maps port 5000 from the container to port 5000 on your host machine:
+
+```bash
+docker run -p 5000:5000 --env-file .env flask-weather-app
+
+
+
+markdown
+Copy code
+This command will create a Docker image tagged as `flask-weather-app` based on the instructions in the Dockerfile.
+
+### Run the Docker Container
+
+To start the Docker container and make the app accessible on your local machine, use the command below. It maps port 5000 from the container to port 5000 on your host machine:
+
+```bash
+docker run -p 5000:5000 --env-file .env flask-weather-app
+
+
+This will run the application inside a Docker container and allow you to access it via http://localhost:5000 in your browser.
+
+
+
+
 
 ### Usage
 1. Go to `http://127.0.0.1:5000/`.
