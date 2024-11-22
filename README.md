@@ -118,6 +118,9 @@ Before running the project, ensure you have the following installed:
 2. **Invalid City Input**: Error message is displayed.
    ![Invalid City](./static/images/Error-message.png)
 
+3. **No City Entered**: Error message is displayed.
+   ![Invalid City](./static/images/noinput.png)
+
 ---
 
 ## Project Structure
@@ -130,8 +133,7 @@ flask-weather-app/
 ├── templates/           # HTML templates
 │   ├── weather.html     # Main weather display page
 │   └── city-not-found.html  # Error page for invalid city input
-├── app.py               # Main Flask app
-├── check_weather.py     # Script to fetch weather data from the API
+├── server.py               # Main Flask app
 ├── .env                 # API Key storage
 ├── .gitignore           # Ignored files (includes venv and .env)
 ├── requirements.txt     # List of dependencies
