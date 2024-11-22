@@ -11,7 +11,7 @@ COPY . /app
 RUN pip install --no-cache-dir -r requirement.txt
 
 # Copy and set environment variables from .env
-COPY .env .env
+#COPY .env .env
 
 # Expose the port the app runs on
 EXPOSE 5000
